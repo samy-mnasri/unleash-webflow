@@ -1,7 +1,7 @@
 module.exports = {
   entry: './index.js',
   output: {
-    globalObject: 'this',
+    library: 'webflawless',
     filename: 'main.js'
   },
   mode: 'production'

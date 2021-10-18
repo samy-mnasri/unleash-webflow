@@ -2,8 +2,6 @@ import get from 'lodash.get'
 import set from 'lodash.set'
 import axios from 'axios'
 
-const window = global.window
-
 window.webflawless = { data: {} }
 
 const listeners = { saved: {} }
@@ -320,3 +318,5 @@ window.webflawless.action = ({ type, selector, trigger, condition, params }) => 
     document.addEventListener('DOMContentLoaded', triggerAction)
   }
 }
+
+export default window.webflawless
