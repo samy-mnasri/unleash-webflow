@@ -2,38 +2,22 @@ var $klFNZ$lodashget = require("lodash.get");
 var $klFNZ$lodashset = require("lodash.set");
 var $klFNZ$axios = require("axios");
 
-var $parcel$global =
-typeof globalThis !== 'undefined'
-  ? globalThis
-  : typeof self !== 'undefined'
-  ? self
-  : typeof window !== 'undefined'
-  ? window
-  : typeof global !== 'undefined'
-  ? global
-  : {};
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
-}
-function $parcel$defineInteropFlag(a) {
-  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
 }
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
 
-$parcel$defineInteropFlag(module.exports);
-
-$parcel$export(module.exports, "default", () => $4fa0c73a46e81912$export$2e2bcd8739ae039);
+$parcel$export(module.exports, "webflawless", () => $4fa0c73a46e81912$export$39aae864be0dccbc);
 
 
 
-const $4fa0c73a46e81912$var$webflawless = {
+const $4fa0c73a46e81912$export$39aae864be0dccbc = {
     data: {
     }
 };
-$parcel$global.webflawless = $4fa0c73a46e81912$var$webflawless;
-window.webflawless = $4fa0c73a46e81912$var$webflawless;
+window.webflawless = $4fa0c73a46e81912$export$39aae864be0dccbc;
 const $4fa0c73a46e81912$var$listeners = {
     saved: {
     }
@@ -81,10 +65,10 @@ const $4fa0c73a46e81912$var$helpers = {
     },
     getInputs: ({ inputs: inputs , map: map  })=>{
         let data;
-        if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) data = $parcel$interopDefault($klFNZ$lodashget)($4fa0c73a46e81912$var$webflawless, inputs);
+        if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) data = $parcel$interopDefault($klFNZ$lodashget)($4fa0c73a46e81912$export$39aae864be0dccbc, inputs);
         else data = JSON.parse(JSON.stringify(inputs));
         if (!Array.isArray(data) && typeof data === 'object') {
-            for(const key in data)if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) data[key] = $parcel$interopDefault($klFNZ$lodashget)($4fa0c73a46e81912$var$webflawless, data[key]);
+            for(const key in data)if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) data[key] = $parcel$interopDefault($klFNZ$lodashget)($4fa0c73a46e81912$export$39aae864be0dccbc, data[key]);
         }
         if (map) {
             if (Array.isArray(data)) data = data.map((item)=>{
@@ -109,17 +93,17 @@ const $4fa0c73a46e81912$var$helpers = {
             params: urlParams
         }).then(({ data: data  })=>{
             if (saveAs) {
-                $4fa0c73a46e81912$var$webflawless.data.saved[saveAs] = data;
-                if ($4fa0c73a46e81912$var$listeners.saved[saveAs]) $4fa0c73a46e81912$var$listeners.saved[saveAs].map((action)=>$4fa0c73a46e81912$var$webflawless.action(action)
+                $4fa0c73a46e81912$export$39aae864be0dccbc.data.saved[saveAs] = data;
+                if ($4fa0c73a46e81912$var$listeners.saved[saveAs]) $4fa0c73a46e81912$var$listeners.saved[saveAs].map((action)=>$4fa0c73a46e81912$export$39aae864be0dccbc.action(action)
                 );
-                if (saveAs === 'local') window.localStorage.setItem('webflawless', JSON.stringify($4fa0c73a46e81912$var$webflawless.data.saved.local));
-                else if (saveAs === 'session') window.localStorage.setItem('webflawless', JSON.stringify($4fa0c73a46e81912$var$webflawless.data.saved.session));
+                if (saveAs === 'local') window.localStorage.setItem('webflawless', JSON.stringify($4fa0c73a46e81912$export$39aae864be0dccbc.data.saved.local));
+                else if (saveAs === 'session') window.localStorage.setItem('webflawless', JSON.stringify($4fa0c73a46e81912$export$39aae864be0dccbc.data.saved.session));
             }
-            if (actionOnLoad) $4fa0c73a46e81912$var$webflawless.action(actionOnLoad);
+            if (actionOnLoad) $4fa0c73a46e81912$export$39aae864be0dccbc.action(actionOnLoad);
         });
     }
 };
-$4fa0c73a46e81912$var$webflawless.condition = (left, condition, right)=>{
+$4fa0c73a46e81912$export$39aae864be0dccbc.condition = (left, condition, right)=>{
     if (condition === 'equals') return $4fa0c73a46e81912$var$helpers.getInputs({
         inputs: left
     }) === $4fa0c73a46e81912$var$helpers.getInputs({
@@ -167,7 +151,7 @@ $4fa0c73a46e81912$var$webflawless.condition = (left, condition, right)=>{
         inputs: right
     });
 };
-$4fa0c73a46e81912$var$webflawless.data.url = {
+$4fa0c73a46e81912$export$39aae864be0dccbc.data.url = {
     value: window.location.href,
     href: window.location.href,
     params: Object.fromEntries(new URLSearchParams(window.location.search).entries()),
@@ -176,23 +160,23 @@ $4fa0c73a46e81912$var$webflawless.data.url = {
     host: window.location.host,
     hash: window.location.hash
 };
-$4fa0c73a46e81912$var$webflawless.data.context = {
+$4fa0c73a46e81912$export$39aae864be0dccbc.data.context = {
     item: null,
     input: null
 };
-$4fa0c73a46e81912$var$webflawless.data.saved = {
+$4fa0c73a46e81912$export$39aae864be0dccbc.data.saved = {
     local: window.localStorage.getItem('webflawless') || {
     },
     session: window.sessionStorage.getItem('webflawless') || {
     }
 };
-$4fa0c73a46e81912$var$webflawless.data.getCookie = (name)=>{
+$4fa0c73a46e81912$export$39aae864be0dccbc.data.getCookie = (name)=>{
     return document.cookie.split(name + '=')[1] ? decodeURIComponent(document.cookie.split(name + '=')[1].split(';')[0]) : null;
 };
-$4fa0c73a46e81912$var$webflawless.data.setCookie = ({ name: name , value: value  })=>{
+$4fa0c73a46e81912$export$39aae864be0dccbc.data.setCookie = ({ name: name , value: value  })=>{
     document.cookie = name + '=' + encodeURIComponent(value);
 };
-$4fa0c73a46e81912$var$webflawless.action = ({ type: type , selector: selector , trigger: trigger , condition: condition , params: params  })=>{
+$4fa0c73a46e81912$export$39aae864be0dccbc.action = ({ type: type , selector: selector , trigger: trigger , condition: condition , params: params  })=>{
     console.log({
         type: type,
         selector: selector,
@@ -240,7 +224,7 @@ $4fa0c73a46e81912$var$webflawless.action = ({ type: type , selector: selector , 
                     inputs: params.data,
                     map: params.map
                 });
-                $parcel$interopDefault($klFNZ$lodashset)($4fa0c73a46e81912$var$webflawless, params.as, value);
+                $parcel$interopDefault($klFNZ$lodashset)($4fa0c73a46e81912$export$39aae864be0dccbc, params.as, value);
             } else if (type === 'setUrlParams') {
                 if (selector) $4fa0c73a46e81912$var$helpers.getNodesFromSelector({
                     selector: selector
@@ -308,7 +292,7 @@ $4fa0c73a46e81912$var$webflawless.action = ({ type: type , selector: selector , 
     const triggerAction = ()=>{
         if (trigger) {
             if (trigger.event === 'saved') {
-                if ($4fa0c73a46e81912$var$webflawless.data.saved[trigger.selector]) action();
+                if ($4fa0c73a46e81912$export$39aae864be0dccbc.data.saved[trigger.selector]) action();
                 if (!$4fa0c73a46e81912$var$listeners.saved[trigger.selector]) $4fa0c73a46e81912$var$listeners.saved[trigger.selector] = [];
                 $4fa0c73a46e81912$var$listeners.saved[trigger.selector].push({
                     type: type,
@@ -322,9 +306,9 @@ $4fa0c73a46e81912$var$webflawless.action = ({ type: type , selector: selector , 
                 window
             ]).map((node)=>{
                 node.addEventListener(trigger.event, ()=>{
-                    $4fa0c73a46e81912$var$webflawless.data.context.input = node.value;
+                    $4fa0c73a46e81912$export$39aae864be0dccbc.data.context.input = node.value;
                     const iterateContainer = node.closest('[webflawless-data]');
-                    if (iterateContainer) $4fa0c73a46e81912$var$webflawless.data.context.item = JSON.parse(iterateContainer.getAttribute('webflawless-data'));
+                    if (iterateContainer) $4fa0c73a46e81912$export$39aae864be0dccbc.data.context.item = JSON.parse(iterateContainer.getAttribute('webflawless-data'));
                     action();
                 });
                 return null;
@@ -334,7 +318,6 @@ $4fa0c73a46e81912$var$webflawless.action = ({ type: type , selector: selector , 
     if (document.readyState === 'complete' || document.readyState === 'interactive') triggerAction();
     else document.addEventListener('DOMContentLoaded', triggerAction);
 };
-var $4fa0c73a46e81912$export$2e2bcd8739ae039 = $4fa0c73a46e81912$var$webflawless;
 
 
 //# sourceMappingURL=main.js.map
