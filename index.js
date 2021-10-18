@@ -2,9 +2,9 @@ import get from 'lodash.get'
 import set from 'lodash.set'
 import axios from 'axios'
 
-const webflawless = {
-  data: {}
-}
+window.webflawless = {}
+const webflawless = window.webflawless
+webflawless.data = {}
 
 const listeners = { saved: {} }
 
