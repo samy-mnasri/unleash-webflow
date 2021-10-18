@@ -3,8 +3,6 @@ import set from 'lodash.set'
 import axios from 'axios'
 
 const webflawless = { data: {} }
-window.webflawless = webflawless
-
 const listeners = { saved: {} }
 
 const helpers = {
@@ -320,6 +318,4 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
   }
 }
 
-export {
-  webflawless
-}
+window.webflawless = webflawless
