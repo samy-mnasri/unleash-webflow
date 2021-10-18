@@ -4,7 +4,6 @@ module.exports = {
   mode: 'production',
   output: {
     filename: 'main.js',
-    library: 'webflawless',
-    libraryTarget: 'umd'
+    library: 'webflawless'
   }
 }
