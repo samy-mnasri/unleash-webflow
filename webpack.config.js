@@ -5,7 +5,9 @@ module.exports = {
       name: 'webflawless',
       type: 'umd'
     },
-    filename: 'main.js'
+    filename: 'main.js',
+    globalObject: 'this',
+    libraryTarget: 'umd'
   },
   mode: 'production'
 }
