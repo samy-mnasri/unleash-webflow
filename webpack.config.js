@@ -1,7 +1,10 @@
 module.exports = {
   entry: './index.js',
   output: {
-    library: 'webflawless',
+    library: {
+      name: 'webflawless',
+      type: 'umd'
+    },
     filename: 'main.js'
   },
   mode: 'production'

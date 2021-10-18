@@ -2,7 +2,7 @@ import get from 'lodash.get'
 import set from 'lodash.set'
 import axios from 'axios'
 
-window.webflawless = { data: {} }
+const webflawless = { data: {} }
 
 const listeners = { saved: {} }
 
@@ -73,7 +73,7 @@ const helpers = {
     let data
 
     if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) {
-      data = get(window.webflawless, inputs)
+      data = get(webflawless, inputs)
       // } else if (typeof inputs === 'number') {
       //   data = [...Array(inputs)].map((_, index) => ({ index }))
     } else {
@@ -83,7 +83,7 @@ const helpers = {
     if (!Array.isArray(data) && typeof data === 'object') {
       for (const key in data) {
         if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) {
-          data[key] = get(window.webflawless, data[key])
+          data[key] = get(webflawless, data[key])
         }
       }
     }
@@ -115,27 +115,27 @@ const helpers = {
     axios.request({ url, method: method || 'get', data, headers, params: urlParams })
       .then(({ data }) => {
         if (saveAs) {
-          window.webflawless.data.saved[saveAs] = data
+          webflawless.data.saved[saveAs] = data
 
           if (listeners.saved[saveAs]) {
-            listeners.saved[saveAs].map(action => window.webflawless.action(action))
+            listeners.saved[saveAs].map(action => webflawless.action(action))
           }
 
           if (saveAs === 'local') {
-            window.localStorage.setItem('webflawless', JSON.stringify(window.webflawless.data.saved.local))
+            window.localStorage.setItem('webflawless', JSON.stringify(webflawless.data.saved.local))
           } else if (saveAs === 'session') {
-            window.localStorage.setItem('webflawless', JSON.stringify(window.webflawless.data.saved.session))
+            window.localStorage.setItem('webflawless', JSON.stringify(webflawless.data.saved.session))
           }
         }
 
         if (actionOnLoad) {
-          window.webflawless.action(actionOnLoad)
+          webflawless.action(actionOnLoad)
         }
       })
   }
 }
 
-window.webflawless.condition = (left, condition, right) => {
+webflawless.condition = (left, condition, right) => {
   if (condition === 'equals') {
     return helpers.getInputs({ inputs: left }) === helpers.getInputs({ inputs: right })
   } else if (condition === 'does not equal') {
@@ -159,7 +159,7 @@ window.webflawless.condition = (left, condition, right) => {
   }
 }
 
-window.webflawless.data.url = {
+webflawless.data.url = {
   value: window.location.href,
   href: window.location.href,
   params: Object.fromEntries(new URLSearchParams(window.location.search).entries()),
@@ -169,27 +169,27 @@ window.webflawless.data.url = {
   hash: window.location.hash
 }
 
-window.webflawless.data.context = {
+webflawless.data.context = {
   item: null,
   input: null
 }
 
-window.webflawless.data.saved = {
+webflawless.data.saved = {
   local: window.localStorage.getItem('webflawless') || {},
   session: window.sessionStorage.getItem('webflawless') || {}
 }
 
-window.webflawless.data.getCookie = (name) => {
+webflawless.data.getCookie = (name) => {
   return document.cookie.split(name + '=')[1]
     ? decodeURIComponent(document.cookie.split(name + '=')[1].split(';')[0])
     : null
 }
 
-window.webflawless.data.setCookie = ({ name, value }) => {
+webflawless.data.setCookie = ({ name, value }) => {
   document.cookie = name + '=' + encodeURIComponent(value)
 }
 
-window.webflawless.action = ({ type, selector, trigger, condition, params }) => {
+webflawless.action = ({ type, selector, trigger, condition, params }) => {
   console.log({ type, selector, trigger, condition, params })
 
   const action = () => {
@@ -218,7 +218,7 @@ window.webflawless.action = ({ type, selector, trigger, condition, params }) => 
         window.parent.postMessage(helpers.getInputs({ inputs: params.value }), '*')
       } else if (type === 'save') {
         const value = helpers.getInputs({ inputs: params.data, map: params.map })
-        set(window.webflawless, params.as, value)
+        set(webflawless, params.as, value)
       } else if (type === 'setUrlParams') {
         if (selector) {
           helpers.getNodesFromSelector({ selector }).map(node => {
@@ -282,7 +282,7 @@ window.webflawless.action = ({ type, selector, trigger, condition, params }) => 
   const triggerAction = () => {
     if (trigger) {
       if (trigger.event === 'saved') {
-        if (window.webflawless.data.saved[trigger.selector]) {
+        if (webflawless.data.saved[trigger.selector]) {
           action()
         }
 
@@ -294,11 +294,11 @@ window.webflawless.action = ({ type, selector, trigger, condition, params }) => 
       } else {
         (helpers.getNodesFromSelector({ selector: trigger.selector }) || [window]).map(node => {
           node.addEventListener(trigger.event, () => {
-            window.webflawless.data.context.input = node.value
+            webflawless.data.context.input = node.value
             const iterateContainer = node.closest('[webflawless-data]')
 
             if (iterateContainer) {
-              window.webflawless.data.context.item = JSON.parse(iterateContainer.getAttribute('webflawless-data'))
+              webflawless.data.context.item = JSON.parse(iterateContainer.getAttribute('webflawless-data'))
             }
 
             action()
@@ -319,4 +319,4 @@ window.webflawless.action = ({ type, selector, trigger, condition, params }) => 
   }
 }
 
-export default window.webflawless
+export default webflawless
