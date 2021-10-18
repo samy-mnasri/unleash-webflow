@@ -1,6 +1,6 @@
-var $klFNZ$lodashget = require("lodash.get");
-var $klFNZ$lodashset = require("lodash.set");
-var $klFNZ$axios = require("axios");
+var $enRkb$lodashget = require("lodash.get");
+var $enRkb$lodashset = require("lodash.set");
+var $enRkb$axios = require("axios");
 
 var $parcel$global =
 typeof globalThis !== 'undefined'
@@ -81,19 +81,19 @@ const $4fa0c73a46e81912$var$helpers = {
     },
     getInputs: ({ inputs: inputs , map: map  })=>{
         let data;
-        if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) data = $parcel$interopDefault($klFNZ$lodashget)($4fa0c73a46e81912$var$webflawless, inputs);
+        if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) data = $parcel$interopDefault($enRkb$lodashget)($4fa0c73a46e81912$var$webflawless, inputs);
         else data = JSON.parse(JSON.stringify(inputs));
         if (!Array.isArray(data) && typeof data === 'object') {
-            for(const key in data)if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) data[key] = $parcel$interopDefault($klFNZ$lodashget)($4fa0c73a46e81912$var$webflawless, data[key]);
+            for(const key in data)if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) data[key] = $parcel$interopDefault($enRkb$lodashget)($4fa0c73a46e81912$var$webflawless, data[key]);
         }
         if (map) {
             if (Array.isArray(data)) data = data.map((item)=>{
                 const newItem = {
                 };
-                for(const key in map)newItem[key] = $parcel$interopDefault($klFNZ$lodashget)(item, map[key]);
+                for(const key in map)newItem[key] = $parcel$interopDefault($enRkb$lodashget)(item, map[key]);
                 return newItem;
             });
-            else if (typeof data === 'object') for(const key in map)data[key] = $parcel$interopDefault($klFNZ$lodashget)(data, map[key]);
+            else if (typeof data === 'object') for(const key in map)data[key] = $parcel$interopDefault($enRkb$lodashget)(data, map[key]);
         }
         return data;
     },
@@ -101,7 +101,7 @@ const $4fa0c73a46e81912$var$helpers = {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     },
     request: ({ url: url , method: method , data: data , headers: headers , urlParams: urlParams , saveAs: saveAs , actionOnLoad: actionOnLoad  })=>{
-        $parcel$interopDefault($klFNZ$axios).request({
+        $parcel$interopDefault($enRkb$axios).request({
             url: url,
             method: method || 'get',
             data: data,
@@ -240,7 +240,7 @@ $4fa0c73a46e81912$var$webflawless.action = ({ type: type , selector: selector , 
                     inputs: params.data,
                     map: params.map
                 });
-                $parcel$interopDefault($klFNZ$lodashset)($4fa0c73a46e81912$var$webflawless, params.as, value);
+                $parcel$interopDefault($enRkb$lodashset)($4fa0c73a46e81912$var$webflawless, params.as, value);
             } else if (type === 'setUrlParams') {
                 if (selector) $4fa0c73a46e81912$var$helpers.getNodesFromSelector({
                     selector: selector

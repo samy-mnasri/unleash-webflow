@@ -1,15 +1,17 @@
 {
   "name": "webflawless",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/main.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "build": "parcel build"
   },
+  "source": "index.js",
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "babel-loader": "^8.2.2",
+    "parcel": "^2.0.0",
     "standard": "^16.0.4",
     "webpack": "^5.58.2",
     "webpack-cli": "^4.9.1"
