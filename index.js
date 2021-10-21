@@ -223,7 +223,7 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
         window.parent.postMessage(helpers.getInputs({ inputs: params.value }), '*')
       } else if (type === 'save') {
         const value = helpers.getInputs({ inputs: params.data, map: params.map })
-        set(webflawless, params.as, value)
+        set(webflawless.data.saved, params.as, value)
       } else if (type === 'setUrlParams') {
         if (selector) {
           helpers.getNodesFromSelector({ selector }).map(node => {
