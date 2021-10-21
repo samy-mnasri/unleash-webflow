@@ -71,14 +71,12 @@ const helpers = {
   getInputs: ({ inputs, map }) => {
     let data
 
-    if (typeof inputs === 'function') {
-      data = inputs()
-    }
-
     if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) {
       data = get(webflawless, inputs)
       // } else if (typeof inputs === 'number') {
       //   data = [...Array(inputs)].map((_, index) => ({ index }))
+    } else if (typeof inputs === 'function') {
+      data = inputs()
     } else {
       data = JSON.parse(JSON.stringify(inputs))
     }
