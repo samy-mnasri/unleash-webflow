@@ -71,6 +71,10 @@ const helpers = {
   getInputs: ({ inputs, map }) => {
     let data
 
+    if (typeof inputs === 'function') {
+      data = inputs()
+    }
+
     if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) {
       data = get(webflawless, inputs)
       // } else if (typeof inputs === 'number') {
@@ -135,7 +139,10 @@ const helpers = {
 }
 
 webflawless.functions = {
-  concatenate: (...inputs) => inputs.map(input => helpers.getInputs({ inputs: input })).join('')
+  concatenate: (...inputs) => {
+    const executeLater = () => inputs.map(input => helpers.getInputs({ inputs: input })).join('')
+    return executeLater
+  }
 }
 
 webflawless.condition = (left, condition, right) => {
