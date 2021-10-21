@@ -213,6 +213,12 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
           el.innerText = helpers.getInputs({ inputs: params.value })
           return null
         })
+      } else if (type === 'openUrl') {
+        if (params.newTab) {
+          window.open(helpers.getInputs({ inputs: params.value }), '_blank').focus()
+        } else {
+          window.location.href = helpers.getInputs({ inputs: params.value })
+        }
       } else if (type === 'messageToIframeParent') {
         window.parent.postMessage(helpers.getInputs({ inputs: params.value }), '*')
       } else if (type === 'save') {
