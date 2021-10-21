@@ -134,6 +134,10 @@ const helpers = {
   }
 }
 
+webflawless.functions = {
+  concatenate: (...inputs) => inputs.map(input => helpers.getInputs({ inputs: input })).join('')
+}
+
 webflawless.condition = (left, condition, right) => {
   if (condition === 'equals') {
     return helpers.getInputs({ inputs: left }) === helpers.getInputs({ inputs: right })
