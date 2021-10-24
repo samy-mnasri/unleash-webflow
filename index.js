@@ -307,7 +307,11 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
         listeners.saved[trigger.selector].push({ type, selector, condition, params })
       } else {
         (helpers.getNodesFromSelector({ selector: trigger.selector }) || [window]).map(node => {
-          node.addEventListener(trigger.event, () => {
+          node.addEventListener(trigger.event, event => {
+            if (trigger.event === 'submit') {
+              event.preventDefault()
+            }
+
             webflawless.data.context.input = node.value
             const iterateContainer = node.closest('[webflawless-data]')
 
