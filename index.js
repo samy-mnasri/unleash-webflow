@@ -310,6 +310,7 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
           node.addEventListener(trigger.event, event => {
             if (trigger.event === 'submit') {
               event.preventDefault()
+              event.stopPropagation()
             }
 
             webflawless.data.context.input = node.value
