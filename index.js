@@ -179,7 +179,8 @@ webflawless.data.url = {
 
 webflawless.data.context = {
   item: null,
-  input: null
+  input: null,
+  form: null
 }
 
 webflawless.data.saved = {
@@ -311,6 +312,7 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
             if (trigger.event === 'submit') {
               event.preventDefault()
               event.stopPropagation()
+              webflawless.data.context.form = Object.fromEntries(new FormData(event.target))
             }
 
             webflawless.data.context.input = node.value
