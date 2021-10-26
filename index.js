@@ -85,6 +85,8 @@ const helpers = {
       for (const key in data) {
         if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) {
           data[key] = get(webflawless, data[key])
+        } else if (typeof data[key] === 'function') {
+          data[key] = data[key]()
         }
       }
     }
@@ -312,7 +314,7 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
             if (trigger.event === 'submit') {
               event.preventDefault()
               event.stopPropagation()
-              webflawless.data.context.form = Object.fromEntries(new FormData(event.target))
+              webflawless.data.context.form = Object.fromEntries(new window.FormData(event.target))
             }
 
             webflawless.data.context.input = node.value
