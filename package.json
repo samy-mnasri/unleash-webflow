@@ -1,7 +1,7 @@
 {
   "name": "webflawless",
   "version": "1.0.0",
-  "global": "dist/main.js",
+  "global": "public/webflawless.js",
   "license": "MIT",
   "scripts": {
     "build": "parcel build"
