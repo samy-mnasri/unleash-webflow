@@ -69,6 +69,8 @@ const helpers = {
     }
   },
   getInputs: ({ inputs, map }) => {
+    console.log('getInputs', { inputs, map })
+
     let data
 
     if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) {
@@ -86,6 +88,7 @@ const helpers = {
         if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) {
           data[key] = get(webflawless, data[key])
         } else if (typeof data[key] === 'function') {
+          console.log('getInputs-function-in-object', data[key])
           data[key] = data[key]()
         }
       }
@@ -201,7 +204,7 @@ webflawless.data.setCookie = ({ name, value }) => {
 }
 
 webflawless.action = ({ type, selector, trigger, condition, params }) => {
-  console.log({ type, selector, trigger, condition, params })
+  console.log('action', { type, selector, trigger, condition, params })
 
   const action = () => {
     if (typeof condition === 'undefined' || condition) {
