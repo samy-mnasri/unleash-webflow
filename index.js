@@ -70,8 +70,6 @@ const helpers = {
     }
   },
   getInputs: ({ inputs, map }) => {
-    console.log('getInputs', { inputs, map })
-
     let data
 
     if (typeof inputs === 'string' && (inputs.startsWith('data.') || inputs.startsWith('data['))) {
@@ -89,7 +87,6 @@ const helpers = {
         if (typeof data[key] === 'string' && (data[key].startsWith('data.') || data[key].startsWith('data['))) {
           data[key] = get(webflawless, data[key])
         } else if (typeof data[key] === 'function') {
-          console.log('getInputs-function-in-object', data[key])
           data[key] = data[key]()
         }
       }
@@ -124,8 +121,8 @@ const helpers = {
         if (saveAs) {
           webflawless.data.saved[saveAs] = data
 
-          if (listeners.saved[saveAs]) {
-            listeners.saved[saveAs].map(action => webflawless.action(action))
+          if (get(listeners.saved, saveAs)) {
+            get(listeners.saved, saveAs).map(action => webflawless.action(action))
           }
 
           if (saveAs === 'local') {
@@ -303,15 +300,15 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
   const triggerAction = () => {
     if (trigger) {
       if (trigger.event === 'saved') {
-        if (webflawless.data.saved[trigger.selector]) {
+        if (get(webflawless.data.saved, trigger.selector)) {
           action()
         }
 
-        if (!listeners.saved[trigger.selector]) {
-          listeners.saved[trigger.selector] = []
+        if (!get(listeners.saved, trigger.selector)) {
+          set(listeners.saved, trigger.selector, [])
         }
 
-        listeners.saved[trigger.selector].push({ type, selector, condition, params })
+        get(listeners.saved, trigger.selector).push({ type, selector, condition, params })
       } else {
         (helpers.getNodesFromSelector({ selector: trigger.selector }) || [window]).map(node => {
           node.addEventListener(trigger.event, event => {
