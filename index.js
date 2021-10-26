@@ -1,5 +1,6 @@
 import get from 'lodash.get'
 import set from 'lodash.set'
+import cloneDeep from 'lodash.clonedeep'
 import axios from 'axios'
 
 const webflawless = { data: {} }
@@ -80,7 +81,7 @@ const helpers = {
     } else if (typeof inputs === 'function') {
       data = inputs()
     } else {
-      data = JSON.parse(JSON.stringify(inputs))
+      data = cloneDeep(inputs)
     }
 
     if (!Array.isArray(data) && typeof data === 'object') {
