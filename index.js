@@ -6,6 +6,20 @@ import axios from 'axios'
 const webflawless = { data: {} }
 const listeners = { saved: {} }
 
+const save = ({ data, as }) => {
+  set(webflawless.data.saved, as, data)
+
+  if (get(listeners.saved, as)) {
+    get(listeners.saved, as).map(action => webflawless.action(action))
+  }
+
+  if (as.includes('local')) {
+    window.localStorage.setItem('webflawless', JSON.stringify(webflawless.data.saved.local))
+  } else if (as.includes('session')) {
+    window.localStorage.setItem('webflawless', JSON.stringify(webflawless.data.saved.session))
+  }
+}
+
 const helpers = {
   getNodesFromSelector: ({ selector, contextNode }) => {
     if (typeof selector === 'string' || selector.type === 'css') {
@@ -119,17 +133,7 @@ const helpers = {
     axios.request({ url, method: method || 'get', data, headers, params: urlParams })
       .then(({ data }) => {
         if (saveAs) {
-          webflawless.data.saved[saveAs] = data
-
-          if (get(listeners.saved, saveAs)) {
-            get(listeners.saved, saveAs).map(action => webflawless.action(action))
-          }
-
-          if (saveAs === 'local') {
-            window.localStorage.setItem('webflawless', JSON.stringify(webflawless.data.saved.local))
-          } else if (saveAs === 'session') {
-            window.localStorage.setItem('webflawless', JSON.stringify(webflawless.data.saved.session))
-          }
+          save({ as: saveAs, data })
         }
 
         if (actionOnLoad) {
