@@ -308,7 +308,7 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
   const triggerAction = () => {
     if (trigger) {
       if (trigger.event === 'saved') {
-        if (get(webflawless.data.saved, trigger.selector)) {
+        if (get(webflawless.data.saved, trigger.selector) && !trigger.selector.startsWith('local.') && !trigger.selector.startsWith('session.')) {
           action()
         }
 
