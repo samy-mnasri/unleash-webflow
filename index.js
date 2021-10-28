@@ -191,8 +191,12 @@ webflawless.data.context = {
 }
 
 webflawless.data.saved = {
-  local: window.localStorage.getItem('webflawless') || {},
-  session: window.sessionStorage.getItem('webflawless') || {}
+  local: window.localStorage.getItem('webflawless')
+    ? JSON.parse(window.localStorage.getItem('webflawless'))
+    : {},
+  session: window.sessionStorage.getItem('webflawless')
+    ? JSON.parse(window.sessionStorage.getItem('webflawless'))
+    : {}
 }
 
 webflawless.data.getCookie = (name) => {
