@@ -17,13 +17,13 @@ export default ({ url, method, data, headers, urlParams, saveAs, actionOnSuccess
       console.log(error)
 
       if (error.name) {
-        set(window.webflawless.data.context.error, 'name', error.name)
+        set(window.webflawless.data.context, 'error.name', error.name)
       }
 
       if (error.message) {
-        window.webflawless.data.context.error.message = error.message
+        set(window.webflawless.data.context, 'error.message', error.message)
       } else {
-        window.webflawless.data.context.error.message = error
+        set(window.webflawless.data.context, 'error.message', error)
       }
 
       if (actionOnError) {

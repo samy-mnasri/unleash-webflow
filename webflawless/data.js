@@ -19,7 +19,7 @@ export default {
   context: {
     item: null,
     input: null,
-    form: null,
+    form: {},
     error: null
   },
   setCookie: ({ name, value }) => {
