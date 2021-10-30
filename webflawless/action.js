@@ -20,8 +20,7 @@ export default args => {
           params: {
             url: params.url,
             method: params.method,
-            inputs: params.inputs,
-            data: params.inputs,
+            data: params.data,
             map: params.map,
             headers: params.headers,
             urlParams: params.urlParams,
@@ -54,7 +53,7 @@ export default args => {
         setUrlParams({
           selector,
           params: {
-            inputs: params.inputs,
+            data: params.data,
             map: params.map
           }
         })
@@ -62,7 +61,7 @@ export default args => {
         iterate({
           selector,
           params: {
-            inputs: params.inputs,
+            items: params.items,
             map: params.map,
             iterations: params.iterations
           }
