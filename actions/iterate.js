@@ -3,9 +3,12 @@ import getInputs from '../helpers/getInputs'
 import insertNodeAfter from '../helpers/insertNodeAfter'
 import replaceValueFromNode from '../helpers/replaceValueFromNode'
 
-export default ({ selector, params: { inputs, map } }) => {
+export default ({ selector, params: { inputs, map, iterations } }) => {
   const contextNodes = getNodesFromSelector({ selector })
-  const inputsData = getInputs({ inputs, map })
+
+  const inputsData = iterations
+    ? [...new Array(parseInt(iterations, 10))].map((_, index) => ({ iteration: index + 1 }))
+    : getInputs({ inputs, map })
 
   contextNodes.map(contextNode => {
     if (contextNode.getAttribute('webflawless-clone')) {

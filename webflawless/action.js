@@ -63,7 +63,8 @@ export default args => {
           selector,
           params: {
             inputs: params.inputs,
-            map: params.map
+            map: params.map,
+            iterations: params.iterations
           }
         })
       }
