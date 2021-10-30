@@ -129,15 +129,23 @@ const helpers = {
   insertNodeAfter: ({ newNode, referenceNode }) => {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
   },
-  request: ({ url, method, data, headers, urlParams, saveAs, actionOnLoad }) => {
+  request: ({ url, method, data, headers, urlParams, saveAs, actionOnSuccess, actionOnError }) => {
     axios.request({ url, method: method || 'get', data, headers, params: urlParams })
       .then(({ data }) => {
         if (saveAs) {
           save({ as: saveAs, data })
         }
 
-        if (actionOnLoad) {
-          webflawless.action(actionOnLoad)
+        if (actionOnSuccess) {
+          webflawless.action(actionOnSuccess)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        webflawless.data.context.error = error
+
+        if (actionOnError) {
+          webflawless.action(actionOnError)
         }
       })
   }
@@ -187,7 +195,8 @@ webflawless.data.url = {
 webflawless.data.context = {
   item: null,
   input: null,
-  form: null
+  form: null,
+  error: null
 }
 
 webflawless.data.saved = {
@@ -227,7 +236,8 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
           headers: params.headers && helpers.getInputs({ inputs: params.headers }),
           urlParams: params.urlParams && helpers.getInputs({ inputs: params.urlParams }),
           saveAs: params.saveAs,
-          actionOnLoad: params.actionOnLoad
+          actionOnSuccess: params.actionOnSuccess,
+          actionOnError: params.actionOnError
         })
       } else if (type === 'replaceText') {
         helpers.getNodesFromSelector({ selector }).map(el => {
