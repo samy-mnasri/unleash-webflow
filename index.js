@@ -270,6 +270,7 @@ webflawless.action = ({ type, selector, trigger, condition, params }) => {
           }
 
           window.history.replaceState(null, null, url)
+          webflawless.data.url.params = Object.fromEntries(new URLSearchParams(window.location.search).entries())
         }
       } else if (type === 'iterate') {
         const contextNodes = helpers.getNodesFromSelector({ selector })
