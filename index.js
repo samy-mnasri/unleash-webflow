@@ -142,7 +142,16 @@ const helpers = {
       })
       .catch(error => {
         console.log(error)
-        webflawless.data.context.error = error
+
+        if (error.name) {
+          webflawless.data.context.error.name = error.name
+        }
+
+        if (error.message) {
+          webflawless.data.context.error.message = error.message
+        } else {
+          webflawless.data.context.error.message = error
+        }
 
         if (actionOnError) {
           webflawless.action(actionOnError)
