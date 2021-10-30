@@ -26,6 +26,6 @@ export default ({ selector, params: { inputs, map } }) => {
     }
 
     window.history.replaceState(null, null, url)
-    window.webflawless.data.url.params = Object.fromEntries(new URLSearchParams(window.location.search).entries())
+    window.webflawless.data.url.params = Object.fromEntries(new URLSearchParams(url.search).entries())
   }
 }
